@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<style>
+		html {
+			font-family: consolas;
+			font-size: 100%;
+			background: #333;
+			-webkit-font-smoothing: antialiased;
+		}
+		
+		#page-wrapper {
+			width: 66.67%;
+			background: #FFFFCE;
+			padding: 1em;
+			margin: 1em auto;
+			border-top: 5px solid #69C773;
+			box-shadow: 0px 2px 10px 5px rgba(0,0,0,0.6);
+		}
+		
+		details {
+			border-radius: 5px;
+			background: #EEE;
+			margin: 1em 0;
+		}
+		
+		details[open] summary {
+			background: #69C773;
+			color: #333;
+		}
+		
+		summary {
+			background: #333;
+			color: #FFFFFF;
+			border-radius: 3px;
+			padding: 5px 10px;
+			outline: none;
+		}
+		
+		.table {
+			border: 1px solid black ;
+			border-collapse: collapse ;
+			text-align: center ;
+			vertical-align: middle ;
+			border-color: rgb(55, 113, 137) ;
+		}
+		
+		.thc {
+			border: 1px solid black ;
+			border-collapse: collapse ;
+			text-align: center ;
+			vertical-align: middle ;
+			border-color: rgb(55, 113, 137) ;
+			<!-- font-size: 13pt ; -->
+		}
+		
+		.tdc {
+			border: 1px solid black ;
+			border-collapse: collapse ;
+			text-align: center ;
+			vertical-align: middle ;
+			border-color: rgb(55, 113, 137) ;
+		}
+	</style>
+	<title>解題思路</title>
+</head>
+
+<body>
+	<div id="page-wrapper">
+		<details>
+			<summary>想法(IDEA)</summary>
+			&emsp;因為&nbsp;f(1)&nbsp;=&nbsp;1&nbsp;>&nbsp;0<br />
+			&emsp;故，f(n)&nbsp;恆正&nbsp;(n&nbsp;須為正整數)<br />
+			<br />
+			&emsp;接著，我們假設題目給的數字為第&nbsp;k&nbsp;項<br />
+			&emsp;k&nbsp;是多少，我們不知道<br />
+			<br />
+			&emsp;但我們知道&nbsp;f(1)&nbsp;=&nbsp;1<br />
+			&emsp;故，我們可回推&nbsp;f(k)&nbsp;的值
+		</details>
+	
+		<details>
+			<summary>推算過程(CALCULSTION PROCESS)</summary>
+			&emsp;∵&nbsp;f(n)&nbsp;恆為正數<br />
+			&emsp;∴當&nbsp;f(k)&nbsp;<&nbsp;1時，k&nbsp;絕不可能是偶數<br />
+			&emsp;否則&nbsp;f(k/2)&nbsp;將會是負數<br />
+			<br />
+			&emsp;於是我們得出以下結論：<br />
+			&emsp;&emsp;1. 若&nbsp;f(k)&nbsp;&lt;&nbsp;1，則&nbsp;k&nbsp;為偶數<br />
+			&emsp;&emsp;2. 若&nbsp;f(k)&nbsp;&gt;&nbsp;1，則&nbsp;k&nbsp;為奇數<br />
+			<bt />
+			&emsp;接著，當k為偶數時，f(k)&nbsp;=&nbsp;1&nbsp;+&nbsp;f(k/2)<br />
+			&emsp;將&nbsp;1&nbsp;移到左邊&nbsp;=>&nbsp;f(k)&nbsp;-&nbsp;1&nbsp;=&nbsp;f(k/2)<br />
+			<br />
+			&emsp;由此式得知<br />
+			&emsp;若把&nbsp;f(k)&nbsp;-&nbsp;1，就相當於把自變數&nbsp;k&nbsp;除以&nbsp;2<br />
+			<br />
+			&emsp;而&nbsp;k&nbsp;為奇數時，f(k)&nbsp;=&nbsp;1&nbsp;/&nbsp;f(k-1)<br />
+			&emsp;由此式得知<br />
+			&emsp;若把&nbsp;f(k)&nbsp;取倒數，就相當於把自變數&nbsp;k&nbsp;減&nbsp;1<br />
+			<br />
+			&emsp;因此，我們只要不斷重複以上步驟，那麼&nbsp;k&nbsp;的值就會逐漸減少<br />
+			&emsp;最後，當&nbsp;f(k)&nbsp;=&nbsp;1&nbsp;時，此時的&nbsp;k&nbsp;值就會等於&nbsp;1<br />
+			<br />
+			&emsp;接下來我們只要將除&nbsp;2&nbsp;變乘&nbsp;2，-1&nbsp;變&nbsp;+1&nbsp;就能反求原來的&nbsp;k&nbsp;值
+		</details>
+	
+		<details>
+			<summary>舉例說明(EXAMPLE)</summary>
+			&emsp;3/14&nbsp;是第幾項？<br />
+		
+			<table class="table" style="width: 70%; margin: 1em;">
+				<tr>
+					<th class="thc" style="width: 10%;">f(k)</th>
+					<td class="tdc" style="width: 9%;">3/14</td>
+					<td class="tdc" style="width: 9%;">14/3</td>
+					<td class="tdc" style="width: 9%;">11/3</td>
+					<td class="tdc" style="width: 9%;">8/3</td>
+					<td class="tdc" style="width: 9%;">5/3</td>
+					<td class="tdc" style="width: 9%;">2/3</td>
+					<td class="tdc" style="width: 9%;">3/2</td>
+					<td class="tdc" style="width: 9%;">1/2</td>
+					<td class="tdc" style="width: 9%;">2/1</td>
+					<td class="tdc" style="width: 9%;">1/1</td>
+				</tr>
+			
+				<tr>
+					<th class="thc">k&nbsp;的運算</th>
+					<td class="tdc">-1</td>
+					<td class="tdc">÷2</td>
+					<td class="tdc">÷2</td>
+					<td class="tdc">÷2</td>
+					<td class="tdc">÷2</td>
+					<td class="tdc">-1</td>
+					<td class="tdc">÷2</td>
+					<td class="tdc">-1</td>
+					<td class="tdc">÷2</td>
+					<td class="tdc">k = 1</td>
+				</tr>
+			</table>
+		
+			<br />
+		
+			&emsp;回推&nbsp;k&nbsp;值：<br />
+			<table class="table" style="width: 70%; margin: 1em;">
+				<tr>
+					<th class="thc" style="width: 10%;">k&nbsp;值</th>
+					<td class="tdc" style="width: 9%;">1</td>
+					<td class="tdc" style="width: 9%;">2</td>
+					<td class="tdc" style="width: 9%;">3</td>
+					<td class="tdc" style="width: 9%;">6</td>
+					<td class="tdc" style="width: 9%;">7</td>
+					<td class="tdc" style="width: 9%;">14</td>
+					<td class="tdc" style="width: 9%;">28</td>
+					<td class="tdc" style="width: 9%;">56</td>
+					<td class="tdc" style="width: 9%;">112</td>
+					<td class="tdc" style="width: 9%;">113</td>
+				</tr>
+			
+				<tr>
+					<th class="thc">運算</th>
+					<td class="tdc">×2</td>
+					<td class="tdc">+1</td>
+					<td class="tdc">×2</td>
+					<td class="tdc">+1</td>
+					<td class="tdc">×2</td>
+					<td class="tdc">×2</td>
+					<td class="tdc">×2</td>
+					<td class="tdc">×2</td>
+					<td class="tdc">+1</td>
+					<td class="tdc"></td>
+				</tr>
+			</table>
+		
+			<br />
+		
+			&emsp;k&nbsp;=&nbsp;113<br />
+			&emsp;即第&nbsp;113&nbsp;項
+		</details>
+	
+		<details>
+			<summary>程式邏輯(PROGRAM LOGIC)</summary>
+			&emsp;輸入&nbsp;a&nbsp;b&nbsp;後，先求其最簡分數<br />
+			<br />
+			&emsp;若&nbspa/b&nbsp不是整數，則判斷以下情況：<br />
+			&emsp;&emsp;若&nbsp;a&nbsp;>&nbsp;b，放入&nbsp;a/b&nbsp;(代表減了&nbsp;a/b&nbsp;個&nbsp;1)<br />
+			&emsp;&emsp;若否，則交換&nbsp;a&nbsp;b，放入&nbsp;0<br />
+			<br />
+			&emsp;然後設定第&nbsp;n&nbsp;項的值<br />
+			&emsp;當&nbsp;f(n)&nbsp;為整數時，n&nbsp;的值會等於&nbsp;2<sup>(f(n)&nbsp;-&nbsp;1)</sup><br />
+			<br />
+			&emsp;最後以&nbsp;f(n)&nbsp;回推&nbsp;n&nbsp;的值<br />
+			&emsp;輸出&nbsp;n
+		</details>
+	<div>
+</body>
+</html>
