@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+    <style type="text/css">
+        html {
+            font-family: consolas;
+            font-size: 100%;
+            background: #333;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page-wrapper {
+            width: 66.67%;
+            background: #FFFFCE;
+            padding: 16px;
+            margin: 16px auto;
+            border-top: 5px solid #69C773;
+            box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        .area {
+            margin: 10px;
+            padding: 2px;
+        }
+
+        .area .conclusion {
+            display: inline-block;
+            border-radius: 6px;
+            background: #84E88E;
+            font-weight: bold;
+            padding: 5px;
+        }
+
+        details {
+            border-radius: 6px;
+            background: #D2E0EE;
+            margin: 1em 0;
+            padding: 5px;
+        }
+
+        details[open] summary {
+            background: #69C773;
+            color: #333;
+        }
+
+        summary {
+            background: #333;
+            color: #FFFFFF;
+            border-radius: 3px;
+            padding: 5px 10px;
+            outline: none;
+        }
+
+        div .concept {
+            display: inline-block;
+            vertical-align: middle;
+            width: auto !important;
+            border-radius: 6px;
+            background: #D2E0EE;
+            padding: 5px;
+        }
+
+        div .concept .title {
+            border-radius: 3px;
+            display: inline-block;
+            background: #28924f;
+            color: #FFF;
+            padding: 5px;
+        }
+
+        div .concept .description {
+            display: inline-block;
+            padding: 5px;
+        }
+
+        div .case-description {
+            padding: 5px;
+        }
+
+        div .case-description p {
+            margin-block-start: 0;
+            margin-block-end: 9px;
+        }
+
+        div .case-description .result {
+            display: inline-block;
+            border-radius: 3px;
+            background: rgb(252, 243, 214);
+            color: #FF0000;
+            font-weight: bold;
+            padding: 5px;
+        }
+
+        div .case-description .result p {
+            margin: 0;
+        }
+
+        .mathematical-formula {
+            background: inherit;
+            display: block;
+            align-items: center;
+        }
+
+        .mathematical-formula .multiply-vertical,
+        .mathematical-formula .equation {
+            background: #FFF;
+            padding: 5px;
+            display: block;
+            border-radius: 6px;
+            margin: 0 auto;
+            width: fit-content;
+        }
+    </style>
+    <title>解題思路</title>
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <div class="area">
+            <div class="concept">
+                <div class="title">主要觀念：</div><div class="description">利用餘數的性質</div>
+            </div>
+        </div>
+        <div class="area">
+            <details>
+                <summary>5結尾的自守數</summary>
+                <div class="case-description">
+                    <p>現已知二位數且5結尾的自守數為25，則先假定下一個3位數且5結尾的自守數為「α25」。再以乘法計算後，得出結果如下：</p>
+                    <div class="mathematical-formula" style="margin-bottom: 9px;">
+                        <div class="multiply-vertical">
+                            \begin{array}{r}
+                                &\!&\!&\alpha&2&5\\
+                                \times)&\!&\!&\alpha&2&5\\
+                                \hline
+                                &\!&\!&(5\alpha+1)&2&5\\
+                                &\!&2\alpha&5&0&\!\\
+                                &\alpha^{2}&2\alpha&5\alpha&\!&\!\\
+                                \hline
+                                &\alpha^{2}&4\alpha&(10\alpha+6)&2&5\\
+                            \end{array}
+                        </div>
+                    </div>
+                    <p>此處，我們僅需專注於同為第三位的數字，也就是「10α+6」與「α」。</p>
+                    <p>綜合自守數與餘數的性質，我們可以推斷出「10α+6」與「α」除以10後，會同餘，意即下方等式：</p>
+                    <div class="mathematical-formula" style="margin-bottom: 9px;">
+                        <div class="equation">
+                            \begin{align}10\alpha+6\equiv\alpha\hspace{2mm}(mod\hspace{2mm}10)\end{align}
+                        </div>
+                    </div>
+                    <p>為了方便了解各位數階乘後，對進位的影響，我們將同餘式改寫為：</p>
+                    <div class="mathematical-formula" style="margin-bottom: 9px;">
+                        <div class="equation">
+                            \begin{align}10\alpha+4+2\equiv\alpha\hspace{2mm}(mod\hspace{2mm}10)\end{align}
+                        </div>
+                    </div>
+                    <br>
+                    <p>改寫後可以將同餘式左方，也就是求下一位數的計算式理解為：</p>
+                    <div class="mathematical-formula" style="margin-bottom: 9px;">
+                        <div class="equation">
+                            \begin{array}{l}
+                                假設所求的下一位數字為\alpha\\
+                                (自守數尾數\times2\times\alpha)+(剩餘位數字的組合交乘總和)+(前一進位數字)
+                            \end{array}
+                        </div>
+                    </div>
+                    <p>最後簡化等式，可得出：</p>
+                    <div class="mathematical-formula" style="margin-bottom: 9px;">
+                        <div class="equation">
+                            \begin{align}\alpha\equiv6\hspace{2mm}(mod\hspace{2mm}10)\end{align}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="result">
+                        <p>因此，3位數且5結尾的自守數為625。</p>
+                    </div>
+                </div>
+            </details>
+            <details>
+                <summary>6結尾的自守數</summary>
+                <div class="case-description">
+                    <p>現已知二位數且6結尾的自守數為76，則先假定下一個3位數且6結尾的自守數為「β76」。再以乘法計算後，得出結果如下：</p>
+                    <div class="mathematical-formula" style="margin-bottom: 9px;">
+                        <div class="multiply-vertical">
+                            \begin{array}{r}
+                                &\!&\!&\beta&7&6\\
+                                \times)&\!&\!&\beta&7&6\\
+                                \hline
+                                &\!&\!&(6\beta+4)&5&6\\
+                                &\!&7\beta&53&2&\!\\
+                                &\beta^{2}&7\beta&6\beta&\!&\!\\
+                                \hline
+                                &\beta^{2}&14\beta&(12\beta+57)&7&6\\
+                            \end{array}
+                        </div>
+                    </div>
+                    <p>此處，我們僅需專注於同為第三位的數字，也就是「12β+57」與「β」。</p>
+                    <p>綜合自守數與餘數的性質，我們可以推斷出「10β+6」與「β」除以10後，會同餘，意即下方等式：</p>
+                    <div class="mathematical-formula" style="margin-bottom: 9px;">
+                        <div class="equation">
+                            \begin{align}12\beta+57\equiv\beta\hspace{2mm}(mod\hspace{2mm}10)\end{align}
+                        </div>
+                    </div>
+                    <p>為了方便了解各位數階乘後，對進位的影響，我們將同餘式改寫為：</p>
+                    <div class="mathematical-formula" style="margin-bottom: 9px;">
+                        <div class="equation">
+                            \begin{align}12\beta+49+8\equiv\beta\hspace{2mm}(mod\hspace{2mm}10)\end{align}
+                        </div>
+                    </div>
+                    <br>
+                    <p>改寫後可以將同餘式左方，也就是求下一位數的計算式理解為：</p>
+                    <div class="mathematical-formula" style="margin-bottom: 9px;">
+                        <div class="equation">
+                            \begin{array}{l}
+                                假設所求的下一位數字為\beta\\
+                                (自守數尾數\times2\times\beta)+(剩餘位數字的組合交乘總和)+(前一進位數字)
+                            \end{array}
+                        </div>
+                    </div>
+                    <p>經過同餘定理簡化等式後，會先得出：</p>
+                    <div class="mathematical-formula" style="margin-bottom: 9px;">
+                        <div class="equation">
+                            \begin{align}\beta\equiv-57\hspace{2mm}(mod\hspace{2mm}10)\end{align}
+                        </div>
+                    </div>
+                    <p>根據餘數定理及自守數各位數數字的特性，皆須為正整數。</p>
+                    <br>
+                    <div class="result">
+                        <p>因此，3位數且6結尾的自守數為376。</p>
+                    </div>
+                </div>
+            </details>
+        </div>
+        <div class="area">
+            <div class="conclusion">之後便可以此類推至N位數，求出該位數長度的自守數</div>
+        </div>
+    </div>
+</body>
+
+</html>
