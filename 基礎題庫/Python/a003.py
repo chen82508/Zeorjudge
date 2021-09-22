@@ -1,13 +1,15 @@
-# There are some problem with ASCII encoding
 import sys
+import codecs
 
-for sInput in sys.stdin:
-    M, D = sInput.split()
-    S = int( M * 2 + D ) % 3
+# There are some problem with ASCII encoding
+sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 
-    if S == 0:
-        print("?��???")
-    elif S == 1:
-        print("???")
-    else:
-        print("大�??")
+M, D = input().split()
+S = int( M * 2 + D ) % 3
+
+if S == 0:
+    print("普通")
+elif S == 1:
+    print("吉")
+else:
+    print("大吉")
