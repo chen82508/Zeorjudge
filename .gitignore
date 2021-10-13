@@ -1,2 +1,7 @@
 /.vscode
 /CPP test code
+/.vscode/tasks.json
+/.vscode/c_cpp_properties.json
+/.vscode/launch.json
+/CPP test code/TestMain.exe
+/CPP test code/TestMain.cpp
